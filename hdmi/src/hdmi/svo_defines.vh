@@ -2,9 +2,11 @@
 
 `define SVO_XYBITS 14
 
+// "640x480" "1280x720D" "1120x832v2" (FAIL)"1920x1080R" (FAIL)"1920x1080R2" FPS: 60, (FAIL)"1920x1080x54R2" FPS: 54/52, "1920x1080x30R2" (FAIL)"1920x1080x50R2" (FAIL)"3840x2160x13R2" (FAIL)2560x1440x30R2
+// https://tomverbeure.github.io/video_timings_calculator
 `define SVO_DEFAULT_PARAMS parameter \
-    SVO_MODE             =  "640x480", \
-    SVO_FRAMERATE        =  60, \
+    SVO_MODE             =  "1920x1080x30R2", \
+    SVO_FRAMERATE        =  30, \
     SVO_BITS_PER_PIXEL   =  24, \
     SVO_BITS_PER_RED     =   8, \
     SVO_BITS_PER_GREEN   =   8, \
@@ -22,6 +24,13 @@
 
 `define SVO_DECLS \
 localparam SVO_HOR_PIXELS = \
+  SVO_MODE == "1120x832v2" ? 1120 : \
+  SVO_MODE == "1920x1080R2" ? 1920 : \
+  SVO_MODE == "1920x1080x54R2" ? 1920 : \
+  SVO_MODE == "1920x1080x30R2" ? 1920 : \
+  SVO_MODE == "1920x1080x50R2" ? 1920 : \
+  SVO_MODE == "3840x2160x13R2" ? 3840 : \
+  SVO_MODE == "2560x1440x30R2" ? 2560 : \
   SVO_MODE == "640x480V" ? 640 : \
   SVO_MODE == "960x540" ? 960 : \
   SVO_MODE == "768x576" ? 768 : \
@@ -101,10 +110,18 @@ localparam SVO_HOR_PIXELS = \
   SVO_MODE == "1280x1024" ? 1280 : \
   SVO_MODE == "1280x768" ? 1280 : \
   SVO_MODE == "1280x720R" ? 1280 : \
+  SVO_MODE == "1280x720D" ? 1280 : \
   SVO_MODE == "2560x1600R" ? 2560 : \
   SVO_MODE == "320x240R" ? 320 : \
   'bx; \
 localparam SVO_VER_PIXELS = \
+  SVO_MODE == "1120x832v2" ? 832 : \
+  SVO_MODE == "1920x1080R2" ? 1080 : \
+  SVO_MODE == "1920x1080x54R2" ? 1080 : \
+  SVO_MODE == "1920x1080x30R2" ? 1080 : \
+  SVO_MODE == "1920x1080x50R2" ? 1080 : \
+  SVO_MODE == "3840x2160x13R2" ? 2160 : \
+  SVO_MODE == "2560x1440x30R2" ? 1440 : \
   SVO_MODE == "640x480V" ? 480 : \
   SVO_MODE == "960x540" ? 540 : \
   SVO_MODE == "768x576" ? 576 : \
@@ -184,10 +201,18 @@ localparam SVO_VER_PIXELS = \
   SVO_MODE == "1280x1024" ? 1024 : \
   SVO_MODE == "1280x768" ? 768 : \
   SVO_MODE == "1280x720R" ? 720 : \
+  SVO_MODE == "1280x720D" ? 720 : \
   SVO_MODE == "2560x1600R" ? 1600 : \
   SVO_MODE == "320x240R" ? 240 : \
   'bx; \
 localparam SVO_HOR_FRONT_PORCH = \
+  SVO_MODE == "1120x832v2" ? 8 : \
+  SVO_MODE == "1920x1080R2" ? 8 : \
+  SVO_MODE == "1920x1080x54R2" ? 8 : \
+  SVO_MODE == "1920x1080x30R2" ? 8 : \
+  SVO_MODE == "1920x1080x50R2" ? 8 : \
+  SVO_MODE == "3840x2160x13R2" ? 8 : \
+  SVO_MODE == "2560x1440x30R2" ? 8 : \
   SVO_MODE == "640x480V" ? 16 : \
   SVO_MODE == "960x540" ? 128 : \
   SVO_MODE == "768x576" ? 32 : \
@@ -267,10 +292,18 @@ localparam SVO_HOR_FRONT_PORCH = \
   SVO_MODE == "1280x1024" ? 88 : \
   SVO_MODE == "1280x768" ? 64 : \
   SVO_MODE == "1280x720R" ? 48 : \
+  SVO_MODE == "1280x720D" ? 110 : \
   SVO_MODE == "2560x1600R" ? 48 : \
   SVO_MODE == "320x240R" ? 48 : \
   'bx; \
 localparam SVO_HOR_SYNC = \
+  SVO_MODE == "1120x832v2" ? 32 : \
+  SVO_MODE == "1920x1080R2" ? 32 : \
+  SVO_MODE == "1920x1080x54R2" ? 32	 : \
+  SVO_MODE == "1920x1080x30R2" ? 32	 : \
+  SVO_MODE == "1920x1080x50R2" ? 32 : \
+  SVO_MODE == "3840x2160x13R2" ? 32 : \
+  SVO_MODE == "2560x1440x30R2" ? 32 : \
   SVO_MODE == "640x480V" ? 96 : \
   SVO_MODE == "960x540" ? 112 : \
   SVO_MODE == "768x576" ? 72 : \
@@ -350,10 +383,18 @@ localparam SVO_HOR_SYNC = \
   SVO_MODE == "1280x1024" ? 128 : \
   SVO_MODE == "1280x768" ? 128 : \
   SVO_MODE == "1280x720R" ? 32 : \
+  SVO_MODE == "1280x720D" ? 40 : \
   SVO_MODE == "2560x1600R" ? 32 : \
   SVO_MODE == "320x240R" ? 32 : \
   'bx; \
 localparam SVO_HOR_BACK_PORCH = \
+  SVO_MODE == "1120x832v2" ? 40 : \
+  SVO_MODE == "1920x1080R2" ? 40 : \
+  SVO_MODE == "1920x1080x54R2" ? 40	 : \
+  SVO_MODE == "1920x1080x30R2" ? 40	 : \
+  SVO_MODE == "1920x1080x50R2" ? 12 : \
+  SVO_MODE == "3840x2160x13R2" ? 40 : \
+  SVO_MODE == "2560x1440x30R2" ? 40 : \
   SVO_MODE == "640x480V" ? 48 : \
   SVO_MODE == "960x540" ? 240 : \
   SVO_MODE == "768x576" ? 104 : \
@@ -433,10 +474,18 @@ localparam SVO_HOR_BACK_PORCH = \
   SVO_MODE == "1280x1024" ? 216 : \
   SVO_MODE == "1280x768" ? 192 : \
   SVO_MODE == "1280x720R" ? 80 : \
+  SVO_MODE == "1280x720D" ? 220 : \
   SVO_MODE == "2560x1600R" ? 80 : \
   SVO_MODE == "320x240R" ? 80 : \
   'bx; \
 localparam SVO_VER_FRONT_PORCH = \
+  SVO_MODE == "1120x832v2" ? 10 : \
+  SVO_MODE == "1920x1080R2" ? 17 : \
+  SVO_MODE == "1920x1080x54R2" ? 13	 : \
+  SVO_MODE == "1920x1080x30R2" ? 4	 : \
+  SVO_MODE == "1920x1080x50R2" ? 12 : \
+  SVO_MODE == "3840x2160x13R2" ? 1 : \
+  SVO_MODE == "2560x1440x30R2" ? 7 : \
   SVO_MODE == "640x480V" ? 10 : \
   SVO_MODE == "960x540" ? 3 : \
   SVO_MODE == "768x576" ? 3 : \
@@ -516,10 +565,18 @@ localparam SVO_VER_FRONT_PORCH = \
   SVO_MODE == "1280x1024" ? 3 : \
   SVO_MODE == "1280x768" ? 3 : \
   SVO_MODE == "1280x720R" ? 3 : \
-  SVO_MODE == "2560x1600R" ? 3 : \
+  SVO_MODE == "1280x720D" ? 5 : \
+  SVO_MODE == "2560x1600R" ? 5 : \
   SVO_MODE == "320x240R" ? 3 : \
   'bx; \
 localparam SVO_VER_SYNC = \
+  SVO_MODE == "1120x832v2" ? 8 : \
+  SVO_MODE == "1920x1080R2" ? 8 : \
+  SVO_MODE == "1920x1080x54R2" ? 8	 : \
+  SVO_MODE == "1920x1080x30R2" ? 5	 : \
+  SVO_MODE == "1920x1080x50R2" ? 8 : \
+  SVO_MODE == "3840x2160x13R2" ? 8 : \
+  SVO_MODE == "2560x1440x30R2" ? 8 : \
   SVO_MODE == "640x480V" ? 2 : \
   SVO_MODE == "960x540" ? 5 : \
   SVO_MODE == "768x576" ? 4 : \
@@ -599,10 +656,18 @@ localparam SVO_VER_SYNC = \
   SVO_MODE == "1280x1024" ? 7 : \
   SVO_MODE == "1280x768" ? 10 : \
   SVO_MODE == "1280x720R" ? 5 : \
+  SVO_MODE == "1280x720D" ? 5 : \
   SVO_MODE == "2560x1600R" ? 6 : \
   SVO_MODE == "320x240R" ? 4 : \
   'bx; \
 localparam SVO_VER_BACK_PORCH = \
+  SVO_MODE == "1120x832v2" ? 6 : \
+  SVO_MODE == "1920x1080R2" ? 6 : \
+  SVO_MODE == "1920x1080x54R2" ? 6	 : \
+  SVO_MODE == "1920x1080x30R2" ? 36	 : \
+  SVO_MODE == "1920x1080x50R2" ? 6 : \
+  SVO_MODE == "3840x2160x13R2" ? 6 : \
+  SVO_MODE == "2560x1440x30R2" ? 6 : \
   SVO_MODE == "640x480V" ? 33 : \
   SVO_MODE == "960x540" ? 77 : \
   SVO_MODE == "768x576" ? 16 : \
@@ -682,6 +747,7 @@ localparam SVO_VER_BACK_PORCH = \
   SVO_MODE == "1280x1024" ? 29 : \
   SVO_MODE == "1280x768" ? 17 : \
   SVO_MODE == "1280x720R" ? 13 : \
+  SVO_MODE == "1280x720D" ? 20 : \
   SVO_MODE == "2560x1600R" ? 37 : \
   SVO_MODE == "320x240R" ? 6 : \
   'bx; \
